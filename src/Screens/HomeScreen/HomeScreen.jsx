@@ -8,7 +8,7 @@ function HomeScreen() {
     <>
 
       <Navbar />
-      
+      <h1>Hum Hain Home Screen Pe</h1>
     </>
 
   )
