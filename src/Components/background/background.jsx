@@ -1,7 +1,10 @@
-import React from 'react'
-
+import React, { use, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function Background() {
+
+    const [isOpened, setIsOpened] = useState(false);
+
   return (
 <section>
     
