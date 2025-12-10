@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+
+.font-poppins{
+    font-family: 'Poppins', sans-serif;
+}
+
+.font-raleway{
+    font-family: 'Raleway', sans-serif;
+}
+
+.font-mont{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.font-alum{
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+
+@theme {
+    --color-primary: #609fc7;
+    --color-light: #82c7f5;
+}

@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
 import Navbar from '../../Components/Navbar'
-import Background from '../../Components/background/background'
+import HeroSection from './Components/HeroSection'
 
 
 function HomeScreen() {
@@ -8,11 +7,12 @@ function HomeScreen() {
   return (
 
     <>
-      <Navbar />
-      
-      <Background />
 
-      
+
+      <Navbar />
+
+      <HeroSection />
+    
       
     </>
     

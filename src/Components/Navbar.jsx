@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 function Navbar() {
 
   // sticky nav
-    const [stickyClass, setStickyClass] = useState("");
+    const [stickyClass, setStickyClass] = useState("text-black");
+    const [isSticky, setIsSticky] = useState(false);
 
     function stickNavbar() {
       setStickyClass(window.scrollY > 150 ? "backdrop-blur" : "");
+      setIsSticky(window.scrollY > 150 ? true: false);
     }
 
 
@@ -22,18 +24,19 @@ function Navbar() {
   return (
   
     <nav
-      className={`w-full h-20 flex justify-center items-center bg-transparent fixed z-10 ${stickyClass}`}>
+      className={`w-full h-20 flex justify-center items-center bg-transparent fixed z-10 ${stickyClass} font-poppins`}>
         <div className='w-1/4 h-full flex items-center justify-center'>
-            <h1 className='text-3xl font-bold text-white'>Pic<span className='text-cyan-300'>X</span></h1>
+            <h1 className='text-3xl font-bold'>Pic<span className='text-cyan-300'>X</span></h1>
         </div>
-        <div className='w-1/2 h-full flex items-center justify-evenly'>
-            <Link className='text-white text-lg ' to="/">Home</Link>
-            <Link className='text-white text-lg ' to="/about-us">About</Link>
-            <Link className='text-white text-lg ' to="/pricing">Pricing</Link>
-            <Link className='text-white text-lg ' to="/contact-us">Contact</Link>
+        <div className='w-1/2 h-full flex items-center justify-evenly uppercase'>
+            <Link className='text-lg hover:scale-105 transition' to="/image-enhancement">Enhance</Link>
+            <Link className='text-lg hover:scale-105 transition' to="/image-analyze">Analyze</Link>
+            <Link className='text-lg hover:scale-105 transition' to="/pricing">Pricing</Link>
+            <Link className='text-lg hover:scale-105 transition' to="/about-us">About</Link>
+            <Link className='text-lg hover:scale-105 transition' to="/contact-us">Contact</Link>
         </div>
-        <div className='w-1/4 h-full flex items-center justify-center font-poppins font-medium text-lg text-white'>
-            <Link to={"/user-login"} className=' px-7 py-2 flex items-center justify-center rounded-sm bg-transparent border-2 border-white hover:bg-white transition-colors duration-300 border-transparent hover:border-white hover:text-black' >Join Us</Link>
+        <div className='w-1/4 h-full flex items-center justify-center font-poppins font-medium text-md'>
+            <Link to={"/user-login"} className=' px-7 py-2 flex items-center justify-center rounded-sm bg-linear-to-r from-primary to-light text-white duration-300' >Join Us</Link>
         </div>
     </nav>
   )
