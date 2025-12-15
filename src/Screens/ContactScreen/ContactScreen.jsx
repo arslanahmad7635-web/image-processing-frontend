@@ -1,8 +1,15 @@
 import React from 'react'
+import Navbar from '../../Components/Navbar'
+import Feedback from './Components/Feedback'
 
 function ContactScreen() {
   return (
-    <div>ContactScreen</div>
+    <>
+      <Navbar/>
+      <Feedback/>
+    
+    
+    </>
   )
 }
 

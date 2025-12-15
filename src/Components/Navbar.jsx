@@ -26,7 +26,7 @@ function Navbar() {
     <nav
       className={`w-full h-20 flex justify-center items-center bg-transparent fixed z-10 ${stickyClass} font-poppins`}>
         <div className='w-1/4 h-full flex items-center justify-center'>
-            <h1 className='text-3xl font-bold'>Pic<span className='text-cyan-300'>X</span></h1>
+            <Link to={'/'} className='text-3xl text-primary font-bold'>Pic<span className='text-light'>X</span></Link>
         </div>
         <div className='w-1/2 h-full flex items-center justify-evenly uppercase'>
             <Link className='text-lg hover:scale-105 transition' to="/image-enhancement">Enhance</Link>

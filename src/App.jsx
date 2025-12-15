@@ -5,6 +5,9 @@ import SignupScreen from "./Screens/SignupScreen/SignupScreen"
 import AboutScreen from "./Screens/AboutScreen/AboutScreen"
 import ContactScreen from "./Screens/ContactScreen/ContactScreen"
 import PricingScreen from "./Screens/PricingScreen/PricingScreen"
+import EnhanceScreen from "./Screens/EnhanceScreen/EnhanceScreen"
+
+
 
 function App() {
 
@@ -18,6 +21,7 @@ function App() {
         <Route path="/about-us" element={<AboutScreen />}></Route>
         <Route path="/contact-us" element={<ContactScreen />}></Route>
         <Route path="/pricing" element={<PricingScreen />}></Route>
+        <Route path="/image-enhancement" element={<EnhanceScreen />}></Route>
         
 
         {/* Authentication Screens */}

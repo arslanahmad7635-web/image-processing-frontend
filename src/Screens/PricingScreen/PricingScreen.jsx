@@ -1,8 +1,17 @@
 import React from 'react'
+import Navbar from '../../Components/Navbar'
+import Plans from '../../Components/Plans'
+
 
 function PricingScreen() {
   return (
-    <div>PricingScreen</div>
+    <>
+    <Navbar/>
+    <Plans/>
+    
+    
+  
+     </>
   )
 }
 

@@ -1,5 +1,6 @@
 import Navbar from '../../Components/Navbar'
 import HeroSection from './Components/HeroSection'
+import IntroSection from './Components/IntroSection'
 
 
 function HomeScreen() {
@@ -8,11 +9,11 @@ function HomeScreen() {
 
     <>
 
-
       <Navbar />
 
       <HeroSection />
-    
+
+      <IntroSection />    
       
     </>
     
