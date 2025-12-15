@@ -14,11 +14,11 @@ function HeroSection() {
         <div className='w-full h-full absolute bg-linear-to-t from-white to-transparent z-2 pointer-events-none flex flex-col items-center justify-center'>
 
             <BlurText
-                text="Powerful Image Processing Made Effortlessly Intuitive"
+                text={`Powerful Image Processing Made Effortlessly Intuitive`}
                 delay={250}
                 animateBy="words"
                 direction="top"
-                className="text-6xl mb-8 w-1/2 text-center flex items-center justify-center font-alum font-black uppercase leading-17"
+                className="text-6xl mb-8 w-1/2 text-center flex items-center justify-center font-alum font-black uppercase leading-17 max-md:text-5xl max-sm:w-full max-sm:px-8"
             />
 
 
@@ -34,7 +34,7 @@ function HeroSection() {
             mouse={0.1}
             strength={0.15}
             relaxation={0.9}
-            className="custom-class object-contain object-center"
+            className="custom-class object-contain w-full object-center"
         />
 
     </section>
