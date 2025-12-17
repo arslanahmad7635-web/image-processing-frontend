@@ -6,6 +6,8 @@ import AboutScreen from "./Screens/AboutScreen/AboutScreen"
 import ContactScreen from "./Screens/ContactScreen/ContactScreen"
 import PricingScreen from "./Screens/PricingScreen/PricingScreen"
 import EnhanceScreen from "./Screens/EnhanceScreen/EnhanceScreen"
+import OTPVerifyScreen from "./Screens/OTPVerifyScreen/OTPVerifyScreen"
+
 
 
 
@@ -25,8 +27,9 @@ function App() {
         
 
         {/* Authentication Screens */}
-        <Route path="/user-login" element={<LoginScreen />}></Route>
         <Route path="/user-register" element={<SignupScreen />}></Route>
+        <Route path="/user-otp-verify" element={<OTPVerifyScreen />}></Route>
+        <Route path="/user-login" element={<LoginScreen />}></Route>
 
 
       </Routes>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { AnimatePresence, motion } from 'motion/react';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -8,6 +9,7 @@ function Navbar() {
     const [stickyClass, setStickyClass] = useState("text-black");
     const [isSticky, setIsSticky] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(null);
 
     function stickNavbar() {
       setIsSticky(window.scrollY > 100 ? true: false);
@@ -15,6 +17,18 @@ function Navbar() {
 
 
     useEffect(() => {
+
+      try{
+
+        const response = axios.get('http://127.0.0.1:8000/authentication/check_user_authentication');
+
+        setIsAuthenticated(true);
+
+      } catch(error){
+
+        console.log(error);
+      }
+
       window.addEventListener('scroll', stickNavbar);
 
       return () => {
