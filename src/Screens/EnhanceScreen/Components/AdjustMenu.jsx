@@ -31,77 +31,79 @@ function AdjustMenu(props) {
 
   return (
 
-    <div className='w-full'>
+    <div className='px-4 pt-22 h-full overflow-hidden font-poppins max-md:w-full max-md:pt-6 max-md:rounded-t-3xl max-md:backdrop-blur-2xl'>
 
-        <div className='w-3/4 mb-4 flex items-center justify-center relative'>
+        <div className='flex items-center justify-center relative overflow-hidden max-md:w-full'>
 
-            <h2 className='text-center font-semibold text-xl'>Adjust</h2>
-
-        </div>
-
-        <hr className='w-3/4 border border-gray-200' />
-
-        <div className='w-full flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8'>
-
-            <h3>Brightness</h3>
-
-            <input onChange={(e) => setBrightnessValue(Number(e.target.value))} id="default-range" type="range" min={-50} max={50} step={2} defaultValue={brightnessValue} class="range-slider rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
-
-            <div className='w-3/4 flex items-center justify-center mt-3'>
-
-                <span>{brightnessValue}</span>
-
-            </div>
-
+            <h2 className='text-center font-semibold text-xl uppercase mb-4'>Adjust</h2>
 
         </div>
-        
-        
-        <div className='w-full flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8'>
 
-            <h3>Contrast</h3>
+        <hr className='border border-gray-200' />
 
-            <input onChange={(e) => setContrastValue(Number(e.target.value))} id="default-range" type="range" min={0.1} max={1.9} step={0.1} defaultValue={1} class="range-slider rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
+        <div className='h-full overflow-y-scroll custom-scrollbar-thin px-8'>
+            <div className='flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8'>
 
-            <div className='w-3/4 flex items-center justify-center mt-3'>
+                <h3>Brightness</h3>
 
-                <span>{contrastValue}</span>
+                <input onChange={(e) => setBrightnessValue(Number(e.target.value))} id="default-range" type="range" min={-50} max={50} step={2} defaultValue={brightnessValue} class="range-slider w-full rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
+
+                <div className='w-full flex items-center justify-center mt-3'>
+
+                    <span>{brightnessValue}</span>
+
+                </div>
+
 
             </div>
+            
+            
+            <div className='w-full flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8'>
 
+                <h3>Contrast</h3>
 
-        </div>
-        
-        
-        <div className='w-full flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8'>
+                <input onChange={(e) => setContrastValue(Number(e.target.value))} id="default-range" type="range" min={0.1} max={1.9} step={0.1} defaultValue={1} class="range-slider rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
 
-            <h3>Saturation</h3>
+                <div className='w-full flex items-center justify-center mt-3'>
 
-            <input onChange={(e) => setSaturationValue(Number(e.target.value))} id="default-range" type="range" min={0.1} max={1.9} step={0.1} defaultValue={1} class="range-slider rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
+                    <span>{contrastValue}</span>
 
-            <div className='w-3/4 flex items-center justify-center mt-3'>
+                </div>
 
-                <span>{saturationValue}</span>
 
             </div>
+            
+            
+            <div className='w-full flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8'>
 
+                <h3>Saturation</h3>
 
-        </div>
-        
-        
-        <div className='w-full flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8'>
+                <input onChange={(e) => setSaturationValue(Number(e.target.value))} id="default-range" type="range" min={0.1} max={1.9} step={0.1} defaultValue={1} class="range-slider rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
 
-            <h3>Gamma</h3>
+                <div className='w-full flex items-center justify-center mt-3'>
 
-            <input onChange={(e) => setGammaValue(Number(e.target.value))} id="default-range" type="range" min={0.1} max={1.9} step={0.1} defaultValue={1} class="range-slider rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
+                    <span>{saturationValue}</span>
 
-            <div className='w-3/4 flex items-center justify-center mt-3'>
+                </div>
 
-                <span>{gammaValue}</span>
 
             </div>
+            
+            
+            <div className='w-full flex flex-col items-start justify-start border-b border-gray-200 pb-6 mt-8 mb-8'>
+
+                <h3>Gamma</h3>
+
+                <input onChange={(e) => setGammaValue(Number(e.target.value))} id="default-range" type="range" min={0.1} max={1.9} step={0.1} defaultValue={1} class="range-slider rounded-full bg-transparent border-2 border-black p-1 mt-6"></input>
+
+                <div className='w-full flex items-center justify-center mt-3'>
+
+                    <span>{gammaValue}</span>
+
+                </div>
 
 
+            </div>
         </div>
     </div>
   )
