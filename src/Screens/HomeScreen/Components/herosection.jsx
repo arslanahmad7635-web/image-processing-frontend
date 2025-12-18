@@ -28,14 +28,14 @@ function HeroSection() {
 
         </div>
 
-        {/* <GridDistortion
+        <GridDistortion
             imageSrc="https://images.unsplash.com/photo-1742783201678-33840ee6ee0b?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            grid={10}
+            grid={15}
             mouse={0.1}
             strength={0.15}
             relaxation={0.9}
-            className="custom-class object-contain w-full object-center"
-        /> */}
+            className=""
+        />
 
     </section>
 

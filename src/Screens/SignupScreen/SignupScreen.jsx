@@ -45,22 +45,22 @@ function SignupScreen() {
   }
 
   return (
-    <section className="w-full h-screen flex items-center justify-center overflow-hidden font-poppins bg-[linear-gradient(rgba(255,255,255,.3),rgba(255,255,255,.3)),url('https://images.unsplash.com/photo-1658948653839-107f9cd600cc?q=80&w=1632&auto=htmlFormat&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center">
+    <section className="w-full h-screen flex items-center justify-center overflow-hidden font-poppins bg-[linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0)),url('https://images.unsplash.com/photo-1761448914253-ace71c92d2ef?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center">
 
       <div className='w-[550px] h-full flex items-center justify-center bg-transparent'>
 
-          <motion.form onSubmit={handle_signup} initial={{opacity : 0, scale : 0.8}} animate={{opacity : 1, scale : 1}} transition={{duration : 0.4}} className="w-full h-full flex flex-col items-center justify-center scale-90 bg-white rounded-md shadow-xl group px-8">
+          <motion.form onSubmit={handle_signup} initial={{opacity : 0, scale : 0.8}} animate={{opacity : 1, scale : 1}} transition={{duration : 0.4}} className="w-full flex flex-col items-center justify-center scale-90 bg-[#ffffff10] backdrop-blur rounded-md shadow-xl group px-8 py-6">
 
-                <Link to={"/"} className="font-poppins font-bold text-4xl text-shadow-xl"><span className="text-black">Pic</span><span className="text-cyan-500">X</span></Link>
+                <Link to={"/"} className="font-poppins font-bold text-4xl text-shadow-xl"><span className="text-cyan-500">Pic</span><span className="text-black">X</span></Link>
 
-                {/* <hr className="bg-cyan-500 w-2 h-2 my-6 rounded-full border-none" /> */}
-                <div className={`w-2 h-2 bg-cyan-500 rounded-full transition-all duration-300 flex items-center justify-center capitalize ${errorMsg != '' ? 'w-full h-11 rounded-sm bg-transparent border border-red-600 text-red-600 my-4' : 'my-6'}`}>
+                {/* <hr className="bg-[#000a35] w-2 h-2 my-6 rounded-full border-none" /> */}
+                <div className={`w-2 h-2 bg-[#000a35] rounded-full transition-all duration-300 flex items-center justify-center capitalize ${errorMsg != '' ? 'w-full h-11 rounded-sm bg-transparent border border-red-600 text-red-600 my-4' : 'my-6'}`}>
 
                   <AnimatePresence>
 
                     {
                       errorMsg != '' && (
-                        <motion.p initial={{opacity : 0}} animate={{opacity : 1}} transition={{delay : 0.5}} exit={{opacity : 0, transition : { delay : 0 }}}>{errorMsg}</motion.p>
+                        <motion.p initial={{opacity : 0}} animate={{opacity : 1}} transition={{delay : 0.5}} exit={{opacity : 0, transition : { delay : -0.8 }}}>{errorMsg}</motion.p>
                       )
                     }
 
@@ -69,30 +69,30 @@ function SignupScreen() {
                 </div>
 
                 <div className="flex flex-col justify-center w-full">
-                    <label className="text-cyan-500" htmlFor="username">Name</label>
-                    <input name='username' id="username" type="text" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-md outline-none border-cyan-500 text-cyan-500 mt-1" required />
+                    <label className="text-[#000a35]" htmlFor="username">Name</label>
+                    <input name='username' id="username" type="text" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-md outline-none border-[#000a35] text-[#000a35] mt-1" required />
                 </div>
 
                 <div className="flex flex-col justify-center w-full mt-6">
-                    <label className="text-cyan-500" htmlFor="email">Email</label>
-                   <input name='email' id="email" type="email" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-md outline-none border-cyan-500 text-cyan-500 mt-1" required />
+                    <label className="text-[#000a35]" htmlFor="email">Email</label>
+                   <input name='email' id="email" type="email" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-md outline-none border-[#000a35] text-[#000a35] mt-1" required />
                 </div>
                 
                 <div className="flex flex-col justify-center w-full mt-6">
-                    <label className="text-cyan-500" htmlFor="pass">Password</label>
-                    <input name='password' style={{fontFamily : 'Verdana'}} id="pass" type="password" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-xl outline-none border-cyan-500 text-cyan-500 mt-1" required />
+                    <label className="text-[#000a35]" htmlFor="pass">Password</label>
+                    <input name='password' style={{fontFamily : 'Verdana'}} id="pass" type="password" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-xl outline-none border-[#000a35] text-[#000a35] mt-1" required />
                 </div>
                 
                 <div className="flex flex-col justify-center w-full mt-6">
-                    <label className="text-cyan-500" htmlFor="pass2">Confirm Password</label>
-                    <input name='password2' style={{fontFamily : 'Verdana'}} id="pass2" type="password" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-xl outline-none border-cyan-500 text-cyan-500 mt-1" required />
+                    <label className="text-[#000a35]" htmlFor="pass2">Confirm Password</label>
+                    <input name='password2' style={{fontFamily : 'Verdana'}} id="pass2" type="password" className="bg-cyan-300 h-13 bg-transparent border-2 px-4 text-xl outline-none border-[#000a35] text-[#000a35] mt-1" required />
                 </div>
                 
                 <div className="flex flex-col justify-center w-full mt-7">
-                    <button className="w-full h-14 bg-cyan-500 font-semibold text-white outline-none flex items-center justify-center" type="submit">{isSubmitButtonDisabled ? <BarLoader /> : 'Proceed'}</button>
+                    <button className="w-full h-14 bg-[#000a35] font-semibold text-white outline-none flex items-center justify-center" type="submit">{isSubmitButtonDisabled ? <BarLoader /> : 'Proceed'}</button>
                 </div>
                 
-                <h3 className="text-sm mt-8">Already Have An Account? <Link to="/user-login" className="text-cyan-500 underline">Login</Link></h3>
+                <h3 className="text-sm mt-8 text-white">Already Have An Account? <Link to="/user-login" className="text-cyan-500 underline">Login</Link></h3>
 
             </motion.form>
       </div>

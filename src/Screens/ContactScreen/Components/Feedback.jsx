@@ -3,24 +3,19 @@ import React from 'react'
 function Feedback() {
   return (
    
-    <section className="h-screen bg-gray-50 flex items-center justify-center ">
-      <div className="w-3/5 bg-white rounded-2xl shadow-lg overflow-hidden grid md:grid-cols-2">
+    <section className="h-screen bg-gray-50 flex items-center justify-center font-poppins">
+      <div className="w-6/10 bg-white rounded-2xl overflow-hidden flex flex-col">
         
-        <div className="bg-gradient-to-br from-blue-400 to-primary text-white p-8 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-          <p className="text-indigo-100 mb-6">
+        <div className="text-white p-8 flex flex-col justify-center flex flex-col items-center justify-center">
+          <h2 className="text-3xl text-black font-bold mb-4">Contact Us</h2>
+          <p className="mb-6 text-black">
             We'd love to hear from you.Feel free to contact us anytime and share your queries.
           </p>
-          <div className="leading-8 text-sm">
-            <p><span className="font-semibold">Email:</span> support@example.com</p>
-            <p><span className="font-semibold">Phone:</span> +92 000 3342 </p>
-            <p><span className="font-semibold">Address:</span> Pakistan</p>
-          </div>
         </div>
 
         
         <div className="p-8">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Contact Us</h3>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6"></h3>
           <form className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-1">

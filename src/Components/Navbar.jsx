@@ -2,6 +2,8 @@ import axios from 'axios';
 import { AnimatePresence, motion } from 'motion/react';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import useCheckAuthentication from './Hooks/useCheckAuthentication';
+import {PuffLoader} from 'react-spinners'
 
 function Navbar() {
 
@@ -9,7 +11,9 @@ function Navbar() {
     const [stickyClass, setStickyClass] = useState("text-black");
     const [isSticky, setIsSticky] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+    const {isAuthenticated, loading} = useCheckAuthentication();
+    
 
     function stickNavbar() {
       setIsSticky(window.scrollY > 100 ? true: false);
@@ -18,17 +22,6 @@ function Navbar() {
 
     useEffect(() => {
 
-      try{
-
-        const response = axios.get('http://127.0.0.1:8000/authentication/check_user_authentication');
-
-        setIsAuthenticated(true);
-
-      } catch(error){
-
-        console.log(error);
-      }
-
       window.addEventListener('scroll', stickNavbar);
 
       return () => {
@@ -36,10 +29,12 @@ function Navbar() {
       };
     }, []);
 
+
   return (
   
     <nav
       className={`w-full h-20 flex justify-center items-center max-sm:justify-evenly max-sm:px-4 fixed z-10 ${isSticky ? 'fixed backdrop-blur' : 'absolute bg-transparent'} font-poppins`}>
+
         <AnimatePresence>
           {
             isMenuOpen && (
@@ -119,7 +114,17 @@ function Navbar() {
             <Link className='hover:scale-105 transition' to="/contact-us">Contact</Link>
         </div>
         <div className='w-1/4 h-full flex items-center justify-center font-poppins font-medium text-md z-2'>
-            <Link to={"/user-login"} className=' px-7 py-2 flex items-center justify-center rounded-sm bg-linear-to-r from-primary to-light text-white duration-300 max-sm:text-sm max-sm:px-4'>Join Us</Link>
+            {
+              loading ? (
+                <PuffLoader />
+              ) : (
+                isAuthenticated ? (
+                  <h2>Authenticated</h2>
+                ) : (
+                  <Link to={"/user-login"} className=' px-7 py-2 flex items-center justify-center rounded-sm bg-linear-to-r from-primary to-light text-white duration-300 max-sm:text-sm max-sm:px-4'>Join Us</Link>
+                )
+              )
+            }
         </div>
     </nav>
   )
