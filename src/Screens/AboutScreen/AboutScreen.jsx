@@ -1,18 +1,15 @@
-import React from 'react'
-import Navbar from '../../Components/Navbar'
+import React from 'react';
+import Navbar from '../../Components/Navbar';
+import AboutScreenHero from './Components/aboutscreenhero';
 
 
 function AboutScreen() {
 
   return (
 
-    <section>
-      
-      <div>
+    <section className='w-full flex flex-col'>
         <Navbar />
-        <h1>Hum Hain About Screen Pe</h1>
-      </div>
-      
+        <AboutScreenHero />
     </section>
 
   )
