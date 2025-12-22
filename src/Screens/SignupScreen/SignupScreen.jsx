@@ -49,7 +49,7 @@ function SignupScreen() {
 
       <div className='w-[550px] h-full flex items-center justify-center bg-transparent'>
 
-          <motion.form onSubmit={handle_signup} initial={{opacity : 0, scale : 0.8}} animate={{opacity : 1, scale : 1}} transition={{duration : 0.4}} className="w-full flex flex-col items-center justify-center scale-90 bg-[#ffffff10] backdrop-blur rounded-md shadow-xl group px-8 py-6">
+          <motion.form onSubmit={handle_signup} initial={{opacity : 0, scale : 0.8}} animate={{opacity : 1, scale : 1}} transition={{duration : 0.4}} className="w-full flex flex-col items-center justify-center scale-90 bg-[#ffffff10] backdrop-blur-md rounded-md shadow-xl group px-8 py-6">
 
                 <Link to={"/"} className="font-poppins font-bold text-4xl text-shadow-xl"><span className="text-cyan-500">Pic</span><span className="text-black">X</span></Link>
 

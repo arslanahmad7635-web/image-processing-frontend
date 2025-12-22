@@ -44,11 +44,11 @@ function LoginScreen() {
 
   return (
 
-    <section className="w-full h-screen flex items-center justify-center overflow-hidden font-poppins bg-[linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0)),url('https://images.unsplash.com/photo-1761448914253-ace71c92d2ef?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center">
+    <section className="w-full h-screen bg-orange-300 flex items-center justify-center overflow-hidden font-poppins bg-[linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0)),url('https://images.unsplash.com/photo-1761448914253-ace71c92d2ef?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center">
 
       <div className='w-[550px] h-full flex items-center justify-center'>
           
-          <motion.form onSubmit={handle_login} initial={{opacity : 0, scale : 0.8}} animate={{opacity : 1, scale : 1}} transition={{duration : 0.2}} className="w-full flex flex-col items-center justify-center scale-90 bg-[#ffffff10] backdrop-blur rounded-md shadow-xl group px-8 py-6">
+          <motion.form onSubmit={handle_login} initial={{opacity : 0, scale : 0.8}} animate={{opacity : 1, scale : 1}} transition={{duration : 0.2}} className="w-full flex flex-col items-center justify-center scale-90 bg-[#ffffff10] backdrop-blur-md rounded-md shadow-xl group px-8 py-6">
 
                 <Link to={"/"} className="font-poppins font-bold text-4xl text-shadow-xl"><span className="text-cyan-500">Pic</span><span className="text-black">X</span></Link>
 
@@ -88,10 +88,6 @@ function LoginScreen() {
 
             </motion.form>
       </div>
-      
-      {/* <div className="w-6/10 h-full bg-center bg-no-repeat bg-[url('https://images.unsplash.com/photo-1658948653839-107f9cd600cc?q=80&w=1632&auto=htmlFormat&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]">
-        <div className="w-full h-full bg-linear-to-r from-white to-transparent from-0% to-65% flex items-center justify-center"></div>
-      </div> */}
 
     </section>
 

@@ -81,9 +81,9 @@ function EnhanceScreen() {
 
     <Navbar />
 
-    <section className='w-full h-screen flex items-center justify-center overflow-hidden'>
+    <section className={`w-full h-screen flex items-center ${selectedOption == '' ? 'justify-center' : 'justify-between'} overflow-hidden max-md:flex-col`}>
 
-        <div className='w-6/10 h-full flex flex-col items-center justify-center'>
+        <div className='w-6/10 h-full flex flex-col items-center justify-center max-md:h-1/2'>
 
             <div className={`flex flex-col items-center justify-center p-4 rounded-md ${!imageSelected && 'transition duration-300 hover:shadow-xl'} ${!imageSelected && !imagePreview == '' && 'shadow-xl'}`}>
 
@@ -102,7 +102,7 @@ function EnhanceScreen() {
                         {
                             imagePreview != '' ? (
 
-                                <motion.img initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} className='w-full h-full object-center object-contain absolute rounded-md z-3' src={imagePreview} alt="" />
+                                <motion.img initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} className='w-full h-full object-center object-contain absolute rounded-md z-3 max-md:w-3/4 max-md:h-3/4 max-md:mt-25' src={imagePreview} alt="" />
 
                             ) : ''
                         }
@@ -204,7 +204,7 @@ function EnhanceScreen() {
 
             {
                 selectedOption == 'adjust' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className='w-4/10 h-full bg-white shadow-xl flex items-center justify-center'>
+                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className='h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:bottom-0 max-md:h-1/2'>
                         <AdjustMenu imageId={imageId} apply_adjustment={applyAdjustments} />
                     </motion.div>
                 )
