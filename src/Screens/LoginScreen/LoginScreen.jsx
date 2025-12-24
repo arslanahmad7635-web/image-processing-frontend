@@ -2,6 +2,7 @@ import axios from 'axios';
 import { AnimatePresence, motion } from 'motion/react'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { BarLoader } from 'react-spinners';
 
 function LoginScreen() {
 
@@ -25,6 +26,9 @@ function LoginScreen() {
       console.log(response);
 
       setIsSubmitButtonDisabled(false);
+
+      navigate('/');
+
 
     } catch(error) {
 
@@ -52,7 +56,7 @@ function LoginScreen() {
 
                 <Link to={"/"} className="font-poppins font-bold text-4xl text-shadow-xl"><span className="text-cyan-500">Pic</span><span className="text-black">X</span></Link>
 
-                <div className={`w-2 h-2 bg-[#000a35] rounded-full transition-all duration-300 flex items-center justify-center capitalize ${errorMsg != '' ? 'w-full h-11 rounded-sm bg-transparent border border-red-600 text-red-600 my-4' : 'my-6'}`}>
+                <div className={`w-2 h-2 bg-[#000a35] rounded-full transition-all duration-300 flex items-center justify-center capitalize ${errorMsg != '' ? 'w-full h-11 rounded-sm bg-transparent border border-red-600 text-red-600 my-6' : 'my-6'}`}>
               
                   <AnimatePresence>
 
@@ -81,7 +85,7 @@ function LoginScreen() {
                 </div>
                 
                 <div className="flex flex-col justify-center w-full mt-7">
-                    <button className="w-full h-12 bg-[#000a35] font-semibold text-white" type="submit">Proceed</button>
+                    <button className="w-full h-14 bg-[#000a35] font-semibold text-white flex items-center justify-center" type="submit">{isSubmitButtonDisabled ? <BarLoader color='#ffffff' /> : 'Proceed'}</button>
                 </div>
                 
                 <h3 className="text-sm mt-8 text-white">Don't Have An Account? <Link to="/user-register" className="text-cyan-500 underline">Create Now</Link></h3>

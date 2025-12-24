@@ -27,7 +27,7 @@ function OTPVerifyScreen() {
         };
 
         // Make the verification request
-        const response = await axios.post(`http://127.0.0.1:8000/authentication/user_otp_verify`, data);
+        const response = await axios.post(`http://127.0.0.1:8000/authentication/user_otp_verify`, data, {withCredentials : true});
 
         console.log("OTP Verification Successful:", response.data);
 
@@ -36,7 +36,6 @@ function OTPVerifyScreen() {
         localStorage.setItem('store_time', response.data["store_time"]);
 
         setIsSubmitButtonDisabled(false);
-
 
         navigate("/");
 
