@@ -2,8 +2,9 @@ import axios from 'axios'
 import { AnimatePresence, motion } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../../Components/Navbar'
-import { PuffLoader } from 'react-spinners';
+import { BarLoader, PuffLoader } from 'react-spinners';
 import AdjustMenu from './Components/AdjustMenu';
+import ResizeMenu from './Components/ResizeMenu';
 
 
 function EnhanceScreen() {
@@ -14,9 +15,6 @@ function EnhanceScreen() {
     const [imageSelected, setImageSelected] = useState(false);
     
     const [selectedOption, setSelectedOption] = useState('');
-    const [isAdjustMenuOpen, setIsAdjustMenuOpen] = useState(false);
-    const [isResizeMenuOpen, setIsResizeMenuOpen] = useState(false);
-    const debounceRef = useRef(null);
     
     
     const handleImageChange = (event) => {
@@ -73,6 +71,38 @@ function EnhanceScreen() {
 
         setIsProcessingImage(false);
     }
+    
+    
+    async function resizeImage(image_Id, resize_scale) {
+        if (!image_Id) return;
+
+        setIsProcessingImage(true);
+
+        try{
+
+            const resp = await axios.post('http://127.0.0.1:8000/api/resize_image',
+                {
+                    image_id : image_Id,
+                    resize_scale : resize_scale
+                }
+            );
+
+            setImagePreview(resp.data.image);
+
+            setIsProcessingImage(false);
+
+            console.log(resp);
+
+        } catch(error){
+
+            console.log(error.response.data.error);
+
+        }
+
+        // setImagePreview(res.data.image);
+
+        setIsProcessingImage(false);
+    }
 
 
   return (
@@ -88,6 +118,18 @@ function EnhanceScreen() {
             <div className={`flex flex-col items-center justify-center p-4 rounded-md ${!imageSelected && 'transition duration-300 hover:shadow-xl'} ${!imageSelected && !imagePreview == '' && 'shadow-xl'}`}>
 
                 <div className={`${imageSelected ? 'w-100 h-100' : 'w-70 h-70 shadow-xl'} flex flex-col items-center justify-center rounded-lg relative group transition duration-300`}>
+
+                    <div className='w-full h-full bg-transparent z-4 absolute'>
+
+                        {
+                            isProcessingImage && (
+                                <div className='w-full h-full bg-[#ffffff60] animate-pulse flex items-center justify-center'>
+                                    <PuffLoader />
+                                </div>
+                            )
+                        }
+
+                    </div>
 
                     {
                         !imageSelected && (
@@ -211,8 +253,8 @@ function EnhanceScreen() {
             }
             {
                 selectedOption == 'resize' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className='w-4/10 h-full bg-white shadow-xl flex items-center justify-center'>
-                        <h2>RESIZE</h2>
+                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className='h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:bottom-0 max-md:h-1/2'>
+                        <ResizeMenu imageId={imageId} resize_image={resizeImage} />
                     </motion.div>
                 )
             }
