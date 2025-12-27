@@ -5,6 +5,7 @@ import Navbar from '../../Components/Navbar'
 import { BarLoader, PuffLoader } from 'react-spinners';
 import AdjustMenu from './Components/AdjustMenu';
 import ResizeMenu from './Components/ResizeMenu';
+import GeometryScreen from './Components/GeometryScreen';
 
 
 function EnhanceScreen() {
@@ -13,6 +14,7 @@ function EnhanceScreen() {
     const [imageId, setImageId] = useState(null); 
     const [isProcessingImage, setIsProcessingImage] = useState(false);
     const [imageSelected, setImageSelected] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
     
     const [selectedOption, setSelectedOption] = useState('');
     
@@ -54,6 +56,7 @@ function EnhanceScreen() {
         if (!image_Id) return;
 
         setIsProcessingImage(true);
+        setIsExpanded(false);
 
         const res = await axios.post(
             "http://127.0.0.1:8000/api/apply_adjustments",
@@ -77,6 +80,7 @@ function EnhanceScreen() {
         if (!image_Id) return;
 
         setIsProcessingImage(true);
+        setIsExpanded(false);
 
         try{
 
@@ -103,6 +107,47 @@ function EnhanceScreen() {
 
         setIsProcessingImage(false);
     }
+    
+    
+    
+    async function modifyGeometry(image_Id, changes_to_make) {
+        if (!image_Id) return;
+
+        setIsProcessingImage(true);
+        setIsExpanded(false);
+
+        try{
+
+            const resp = await axios.post('http://127.0.0.1:8000/api/modify_geometry',
+                {
+                    image_id : image_Id,
+                    change_to_be_made : changes_to_make
+                }
+            );
+
+            setImagePreview(resp.data.image);
+
+            setIsProcessingImage(false);
+
+            console.log(resp);
+
+        } catch(error){
+
+            console.log(error.response.data.error);
+
+        }
+
+        // setImagePreview(res.data.image);
+
+        setIsProcessingImage(false);
+    }
+
+
+    useEffect(() => {
+        document.body.style.overflow = selectedOption ? "hidden" : "auto";
+        return () => (document.body.style.overflow = "auto");
+    }, [selectedOption]);
+
 
 
   return (
@@ -111,30 +156,23 @@ function EnhanceScreen() {
 
     <Navbar />
 
-    <section className={`w-full h-screen flex items-center ${selectedOption == '' ? 'justify-center' : 'justify-between'} overflow-hidden max-md:flex-col`}>
+    <section className={`w-full h-screen flex items-center ${selectedOption == '' ? 'justify-center' : 'justify-center'} overflow-hidden max-md:flex-col`}>
 
-        <div className='w-6/10 h-full flex flex-col items-center justify-center max-md:h-1/2'>
+        <div className='w-full h-full flex flex-col items-center justify-center overflow-hidden'>
 
-            <div className={`flex flex-col items-center justify-center p-4 rounded-md ${!imageSelected && 'transition duration-300 hover:shadow-xl'} ${!imageSelected && !imagePreview == '' && 'shadow-xl'}`}>
+            <div className={`flex flex-col items-center justify-center p-2 rounded-md ${!imageSelected && 'transition duration-300 hover:shadow-xl'} ${!imageSelected && !imagePreview == '' && 'shadow-xl'}`}>
 
                 <div className={`${imageSelected ? 'w-100 h-100' : 'w-70 h-70 shadow-xl'} flex flex-col items-center justify-center rounded-lg relative group transition duration-300`}>
 
                     <div className='w-full h-full bg-transparent z-4 absolute'>
 
-                        {
-                            isProcessingImage && (
-                                <div className='w-full h-full bg-[#ffffff60] animate-pulse flex items-center justify-center'>
-                                    <PuffLoader />
-                                </div>
-                            )
-                        }
 
                     </div>
 
                     {
                         !imageSelected && (
 
-                            <input onChange={handleImageChange} type="file" name="image_to_be_processed" className='w-full h-full absolute opacity-0 cursor-pointer z-2' required />
+                            <input onChange={handleImageChange} type="file" name="image_to_be_processed" className='w-full h-full absolute opacity-0 cursor-pointer z-4' required />
 
                         )
                     }
@@ -144,7 +182,7 @@ function EnhanceScreen() {
                         {
                             imagePreview != '' ? (
 
-                                <motion.img initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} className='w-full h-full object-center object-contain absolute rounded-md z-3 max-md:w-3/4 max-md:h-3/4 max-md:mt-25' src={imagePreview} alt="" />
+                                <motion.img initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} className='w-full h-full object-center object-contain absolute rounded-md z-3' src={imagePreview} alt="" />
 
                             ) : ''
                         }
@@ -246,22 +284,106 @@ function EnhanceScreen() {
 
             {
                 selectedOption == 'adjust' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className='h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:bottom-0 max-md:h-1/2'>
+                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className={`h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:h-[80%] max-md:bottom-0 transition-all duration-300 ${isExpanded ? "max-md:translate-y-[0%] border-none" : "max-md:translate-y-[85%] max-md:border-t-2 max-md:border-black rounded-2xl"}`}>
+                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute left-8 top-6 z-2'>
+                            {
+                                isExpanded ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                )
+
+                            }
+                        </button>
+                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute right-8 top-6 z-2'>
+                            {
+                                isExpanded ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                )
+
+                            }
+                        </button>
                         <AdjustMenu imageId={imageId} apply_adjustment={applyAdjustments} />
                     </motion.div>
                 )
             }
             {
                 selectedOption == 'resize' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className='h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:bottom-0 max-md:h-1/2'>
+                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className={`h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:h-[80%] max-md:bottom-0 transition-all duration-300 ${isExpanded ? "max-md:translate-y-[0%] border-none" : "max-md:translate-y-[85%] max-md:border-t-2 max-md:border-black rounded-2xl"}`}>
+                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute left-8 top-6 z-2'>
+                            {
+                                isExpanded ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                )
+
+                            }
+                        </button>
+                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute right-8 top-6 z-2'>
+                            {
+                                isExpanded ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                )
+
+                            }
+                        </button>
                         <ResizeMenu imageId={imageId} resize_image={resizeImage} />
                     </motion.div>
                 )
             }
             {
                 selectedOption == 'geometry' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className='w-4/10 h-full bg-white shadow-xl flex items-center justify-center'>
-                        <h2>Geometry</h2>
+                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className={`h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:h-[80%] max-md:bottom-0 transition-all duration-300 ${isExpanded ? "max-md:translate-y-[0%] border-none" : "max-md:translate-y-[85%] max-md:border-t-2 max-md:border-black rounded-2xl"}`}>
+                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute left-8 top-6 z-2'>
+                            {
+                                isExpanded ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                )
+
+                            }
+                        </button>
+                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute right-8 top-6 z-2'>
+                            {
+                                isExpanded ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                )
+
+                            }
+                        </button>
+                        <GeometryScreen imageId={imageId} modify_geometry={modifyGeometry} />
                     </motion.div>
                 )
             }
