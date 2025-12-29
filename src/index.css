@@ -24,6 +24,8 @@
 }
 
 
+
+
 .range-slider {
   -webkit-appearance: none;
   width: 350px;
@@ -75,4 +77,25 @@
 }
 .custom-scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #555; /* Thumb color on hover */
+}
+
+
+
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #609fc7; /* Thumb color */
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #82c7f5; /* Thumb color on hover */
 }
