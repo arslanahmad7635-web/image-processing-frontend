@@ -22,8 +22,8 @@ function PricingScreen() {
       <div className='flex items-center justify-center mt-6'>
 
         <div className='bg-white p-2 rounded-sm shadow-md'>
-          <button onClick={() => setDuration('monthly')} className={`w-45 py-3 rounded-sm transition duration-300 cursor-pointer ${duration == 'monthly' ? 'bg-light' : 'bg-white'}`}>Monthly</button>
-          <button onClick={() => setDuration('yearly')} className={`w-45 py-3 rounded-sm ml-2 transition duration-300 cursor-pointer ${duration == 'yearly' ? 'bg-light' : 'bg-white'}`}>Yearly</button>
+          <button onClick={() => setDuration('monthly')} className={`w-45 max-sm:w-35 py-3 rounded-sm transition duration-300 cursor-pointer ${duration == 'monthly' ? 'bg-light' : 'bg-white'}`}>Monthly</button>
+          <button onClick={() => setDuration('yearly')} className={`w-45 max-sm:w-35 py-3 rounded-sm ml-2 transition duration-300 cursor-pointer ${duration == 'yearly' ? 'bg-light' : 'bg-white'}`}>Yearly</button>
         </div>
 
       </div>
