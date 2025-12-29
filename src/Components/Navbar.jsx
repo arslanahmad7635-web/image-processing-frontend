@@ -47,7 +47,7 @@ function Navbar() {
                         <div className='w-full flex items-center justify-center'>
                           <Link className='w-[48%] hover:scale-105 transition py-3 flex items-center justify-center' to="/image-enhancement">Enhance</Link>
                           <hr className='h-1/2 border border-primary' />
-                          <Link className='w-[48%] hover:scale-105 transition flex items-center justify-center' to="/image-analyze">Analyze</Link>
+                          <Link className='w-[48%] hover:scale-105 transition flex items-center justify-center' to="/image-analysis">Analyze</Link>
                         </div>
                         <div className='w-full flex items-center justify-center mt-12'>
                           <Link className='w-[48%] hover:scale-105 transition py-3 flex items-center justify-center' to="/pricing">Pricing</Link>
@@ -108,7 +108,7 @@ function Navbar() {
         </div>
         <div className='w-1/2 h-full flex items-center justify-evenly uppercase text-[17px] max-md:text-sm max-sm:hidden'>
             <Link className='hover:scale-105 transition' to="/image-enhancement">Enhance</Link>
-            <Link className='hover:scale-105 transition' to="/image-analyze">Analyze</Link>
+            <Link className='hover:scale-105 transition' to="/image-analysis">Analyze</Link>
             <Link className='hover:scale-105 transition' to="/pricing">Pricing</Link>
             <Link className='hover:scale-105 transition' to="/about-us">About</Link>
             <Link className='hover:scale-105 transition' to="/contact-us">Contact</Link>

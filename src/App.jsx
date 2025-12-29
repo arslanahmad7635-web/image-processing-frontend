@@ -12,6 +12,7 @@ const AboutScreen = lazy(() => import('./Screens/AboutScreen/AboutScreen'));
 const ContactScreen = lazy(() => import('./Screens/ContactScreen/ContactScreen'));
 const PricingScreen = lazy(() => import('./Screens/PricingScreen/PricingScreen'));
 const EnhanceScreen = lazy(() => import('./Screens/EnhanceScreen/EnhanceScreen'));
+const AnalyzeScreen = lazy(() => import('./Screens/AnalyzeScreen/AnalyzeScreen'));
 const OTPVerifyScreen = lazy(() => import('./Screens/OTPVerifyScreen/OTPVerifyScreen'));
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/contact-us" element={<ContactScreen />}></Route>
           <Route path="/pricing" element={<PricingScreen />}></Route>
           <Route path="/image-enhancement" element={<EnhanceScreen />}></Route>
+          <Route path="/image-analysis" element={<AnalyzeScreen />}></Route>
           
 
           {/* Authentication Screens */}
