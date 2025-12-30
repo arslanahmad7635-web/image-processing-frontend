@@ -15,6 +15,7 @@ function EnhanceScreen() {
     const [isProcessingImage, setIsProcessingImage] = useState(false);
     const [imageSelected, setImageSelected] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [userDetails, setUserDetails] = useState(null);
     
     const [selectedOption, setSelectedOption] = useState('');
     
@@ -147,6 +148,22 @@ function EnhanceScreen() {
         document.body.style.overflow = selectedOption ? "hidden" : "auto";
         return () => (document.body.style.overflow = "auto");
     }, [selectedOption]);
+
+
+    
+    useEffect(() => {
+      
+    
+      return async () => {
+
+            const user_details_response = await axios.get('http://127.0.0.1:8000/authentication/get_user_details',{withCredentials : true});
+
+            setUserDetails(user_details_response.data);
+
+      }
+    }, [])
+    
+    
 
 
 
@@ -313,7 +330,7 @@ function EnhanceScreen() {
 
                             }
                         </button>
-                        <AdjustMenu imageId={imageId} apply_adjustment={applyAdjustments} />
+                        <AdjustMenu imageId={imageId} apply_adjustment={applyAdjustments} user_details={userDetails} />
                     </motion.div>
                 )
             }
@@ -348,7 +365,7 @@ function EnhanceScreen() {
 
                             }
                         </button>
-                        <ResizeMenu imageId={imageId} resize_image={resizeImage} />
+                        <ResizeMenu imageId={imageId} resize_image={resizeImage} user_details={userDetails} />
                     </motion.div>
                 )
             }
@@ -383,7 +400,7 @@ function EnhanceScreen() {
 
                             }
                         </button>
-                        <GeometryScreen imageId={imageId} modify_geometry={modifyGeometry} />
+                        <GeometryScreen imageId={imageId} modify_geometry={modifyGeometry} user_details={userDetails} />
                     </motion.div>
                 )
             }

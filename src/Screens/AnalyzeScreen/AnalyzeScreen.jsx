@@ -52,41 +52,55 @@ function AnalyzeScreen() {
         await uploadOriginalImage(imagePreview);
         
     }
-
-
-    async function applyAdjustments(image_Id, brightnes_val,contrast_val,saturation_val,gamma_value) {
-        if (!image_Id) return;
-
-        setIsProcessingImage(true);
-        setIsExpanded(false);
-
-        const res = await axios.post(
-            "http://127.0.0.1:8000/api/apply_adjustments",
-            {
-            image_id: image_Id,
-            brightness: brightnes_val,
-            contrast: contrast_val,
-            saturation: saturation_val,
-            gamma: gamma_value,
-            },
-            { headers: { "Content-Type": "application/json" } }
-        );
-
-        setImagePreview(res.data.image);
-
-        setIsProcessingImage(false);
-    }
     
     
-    async function resizeImage(image_Id, resize_scale) {
+    async function detectEdges(image_Id) {
         if (!image_Id) return;
+
+        setSelectedOption('Edge Detection');
 
         setIsProcessingImage(true);
         setIsExpanded(false);
 
         try{
 
-            const resp = await axios.post('http://127.0.0.1:8000/api/resize_image',
+            const resp = await axios.post('http://127.0.0.1:8000/api/edge_detection',
+                {
+                    image_id : image_Id,
+                }
+            );
+
+            setImagePreview(resp.data.image);
+
+            setIsProcessingImage(false);
+
+
+            console.log(resp);
+
+        } catch(error){
+
+            console.log(error.response.data.error);
+
+        }
+
+        // setImagePreview(res.data.image);
+
+        setIsProcessingImage(false);
+    }
+    
+    
+    
+    async function splitChannels(image_Id) {
+        if (!image_Id) return;
+
+        setSelectedOption('Channel Analysis');
+
+        setIsProcessingImage(true);
+        setIsExpanded(false);
+
+        try{
+
+            const resp = await axios.post('http://127.0.0.1:8000/api/channel_analysis',
                 {
                     image_id : image_Id,
                     resize_scale : resize_scale
@@ -97,39 +111,6 @@ function AnalyzeScreen() {
 
             setIsProcessingImage(false);
 
-            console.log(resp);
-
-        } catch(error){
-
-            console.log(error.response.data.error);
-
-        }
-
-        // setImagePreview(res.data.image);
-
-        setIsProcessingImage(false);
-    }
-    
-    
-    
-    async function modifyGeometry(image_Id, changes_to_make) {
-        if (!image_Id) return;
-
-        setIsProcessingImage(true);
-        setIsExpanded(false);
-
-        try{
-
-            const resp = await axios.post('http://127.0.0.1:8000/api/modify_geometry',
-                {
-                    image_id : image_Id,
-                    change_to_be_made : changes_to_make
-                }
-            );
-
-            setImagePreview(resp.data.image);
-
-            setIsProcessingImage(false);
 
             console.log(resp);
 
@@ -143,6 +124,7 @@ function AnalyzeScreen() {
 
         setIsProcessingImage(false);
     }
+    
 
 
     useEffect(() => {
@@ -232,7 +214,7 @@ function AnalyzeScreen() {
 
                     <div className='w-3/4 flex items-center justify-center'>
 
-                        <span onClick={() => {setSelectedOption('adjust')}} className='flex flex-col items-center justify-center group cursor-pointer'>
+                        <span onClick={() => {detectEdges(imageId)}} className='flex flex-col items-center justify-center group cursor-pointer'>
                             <div className='w-25 h-25 bg-white shadow-xl rounded-full flex items-center justify-center group-hover:scale-105 transition duration-300'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/filter-horizontal-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
                                     <path d="M3 7H6" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -243,10 +225,10 @@ function AnalyzeScreen() {
                                     <path d="M12 17C12 16.0681 12 15.6022 12.1522 15.2346C12.3552 14.7446 12.7446 14.3552 13.2346 14.1522C13.6022 14 14.0681 14 15 14C15.9319 14 16.3978 14 16.7654 14.1522C17.2554 14.3552 17.6448 14.7446 17.8478 15.2346C18 15.6022 18 16.0681 18 17C18 17.9319 18 18.3978 17.8478 18.7654C17.6448 19.2554 17.2554 19.6448 16.7654 19.8478C16.3978 20 15.9319 20 15 20C14.0681 20 13.6022 20 13.2346 19.8478C12.7446 19.6448 12.3552 19.2554 12.1522 18.7654C12 18.3978 12 17.9319 12 17Z" stroke="#000000" stroke-width="1.5"></path>
                                 </svg>
                             </div>
-                            <h3 className='font-poppins text-lg mt-3'>ADJUST</h3>
+                            <h3 className='font-poppins text-lg mt-3'>EDGE DETECTION</h3>
                         </span>
                         
-                        <span onClick={() => {setSelectedOption('resize')}} className='flex flex-col items-center justify-center group cursor-pointer mx-12'>
+                        <span onClick={() => {splitChannels(imageId)}} className='flex flex-col items-center justify-center group cursor-pointer mx-12'>
                             <div className='w-25 h-25 bg-white shadow-xl rounded-full flex items-center justify-center group-hover:scale-105 transition duration-300'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-expand-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
                                     <path d="M8.00001 3.09779C8.00001 3.09779 4.03375 2.74194 3.38784 3.38785C2.74192 4.03375 3.09784 8 3.09784 8" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -259,18 +241,7 @@ function AnalyzeScreen() {
                                     <path d="M13.9795 14.0024L20.5279 20.4983" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
                             </div>
-                            <h3 className='font-poppins text-lg mt-3'>RESIZE</h3>
-                        </span>
-                        
-                        <span onClick={() => {setSelectedOption('geometry')}} className='flex flex-col items-center justify-center group cursor-pointer'>
-                            <div className='w-25 h-25 bg-white shadow-xl rounded-full flex items-center justify-center group-hover:scale-105 transition duration-300'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/flip-vertical-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                    <path d="M9.57959 6.29516C10.5332 7.65364 11.01 8.33288 11.6564 8.46522C11.8828 8.51159 12.1172 8.51159 12.3436 8.46522C12.99 8.33288 13.4668 7.65364 14.4204 6.29516C15.5752 4.65002 16.1527 3.82745 15.9652 3.15323C15.9002 2.91938 15.7784 2.70324 15.6096 2.52214C15.1229 2 14.0819 2 12 2C9.9181 2 8.87715 2 8.39045 2.52214C8.22164 2.70324 8.09984 2.91938 8.03482 3.15323C7.84734 3.82745 8.42476 4.65003 9.57959 6.29516Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M14.4204 17.7048C13.4668 16.3464 12.99 15.6671 12.3436 15.5348C12.1172 15.4884 11.8828 15.4884 11.6564 15.5348C11.01 15.6671 10.5332 16.3464 9.57959 17.7048C8.42475 19.35 7.84734 20.1725 8.03482 20.8468C8.09984 21.0806 8.22164 21.2968 8.39045 21.4779C8.87715 22 9.9181 22 12 22C14.0819 22 15.1229 22 15.6095 21.4779C15.7784 21.2968 15.9002 21.0806 15.9652 20.8468C16.1527 20.1725 15.5752 19.35 14.4204 17.7048Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M10 12H14M17.5 12H21M3 12H6.5" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                                </svg>
-                            </div>
-                            <h3 className='font-poppins text-lg mt-3'>GEOMETRY</h3>
+                            <h3 className='font-poppins text-lg mt-3'>CHANNEL ANALYSIS</h3>
                         </span>
 
                     </div>
@@ -279,116 +250,6 @@ function AnalyzeScreen() {
 
             )
         }
-
-        <AnimatePresence>
-
-            {
-                selectedOption == 'adjust' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className={`h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:h-[80%] max-md:bottom-0 transition-all duration-300 ${isExpanded ? "max-md:translate-y-[0%] border-none" : "max-md:translate-y-[85%] max-md:border-t-2 max-md:border-black rounded-2xl"}`}>
-                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute left-8 top-6 z-2'>
-                            {
-                                isExpanded ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                )
-
-                            }
-                        </button>
-                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute right-8 top-6 z-2'>
-                            {
-                                isExpanded ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                )
-
-                            }
-                        </button>
-                        {/* <AdjustMenu imageId={imageId} apply_adjustment={applyAdjustments} /> */}
-                    </motion.div>
-                )
-            }
-            {
-                selectedOption == 'resize' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className={`h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:h-[80%] max-md:bottom-0 transition-all duration-300 ${isExpanded ? "max-md:translate-y-[0%] border-none" : "max-md:translate-y-[85%] max-md:border-t-2 max-md:border-black rounded-2xl"}`}>
-                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute left-8 top-6 z-2'>
-                            {
-                                isExpanded ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                )
-
-                            }
-                        </button>
-                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute right-8 top-6 z-2'>
-                            {
-                                isExpanded ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                )
-
-                            }
-                        </button>
-                        {/* <ResizeMenu imageId={imageId} resize_image={resizeImage} /> */}
-                    </motion.div>
-                )
-            }
-            {
-                selectedOption == 'geometry' && (
-                    <motion.div initial={{opacity : 0, x : 10}} animate={{opacity : 1, x : 0}} className={`h-full bg-transparent shadow-xl flex items-center justify-center max-md:absolute max-md:w-full max-md:z-4 max-md:h-[80%] max-md:bottom-0 transition-all duration-300 ${isExpanded ? "max-md:translate-y-[0%] border-none" : "max-md:translate-y-[85%] max-md:border-t-2 max-md:border-black rounded-2xl"}`}>
-                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute left-8 top-6 z-2'>
-                            {
-                                isExpanded ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                )
-
-                            }
-                        </button>
-                        <button onClick={() => setIsExpanded(!isExpanded)} type='button' className='hidden max-md:flex items-center justify-center absolute right-8 top-6 z-2'>
-                            {
-                                isExpanded ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-down-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/arrow-up-01-stroke-rounded.svg?v=1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
-                                        <path d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99985 15 5.99985 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                )
-
-                            }
-                        </button>
-                        {/* <GeometryScreen imageId={imageId} modify_geometry={modifyGeometry} /> */}
-                    </motion.div>
-                )
-            }
-
-        </AnimatePresence>
 
     </section>
 
