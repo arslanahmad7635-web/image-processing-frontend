@@ -1,6 +1,8 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import GradientTextt from '../../../Components/ReactBitsComponents/GradientText'
+import BlurText  from '../../../Components/ReactBitsComponents/BlurText'
 import 'swiper/css';
 
 import { motion } from 'motion/react';
@@ -9,7 +11,7 @@ import { motion } from 'motion/react';
 function IntroSection() {
 
   return (
-
+ <>
     <section className='w-full h-90 font-poppins overflow-hidden'>
 
 
@@ -30,7 +32,7 @@ function IntroSection() {
                         </div>
                         <div className="w-1/2 h-full flex items-center justify-center max-sm:hidden">
 
-                            <img className='w-3/4 h-3/4 object-contain object-center max-sm:hidden' src="https://plugins-media.makeupar.com/smb/blog/post/2022-09-02/23aa77d0-67eb-49fe-a515-b31bced529bf.jpg" alt="" />
+                            <img className='w-3/4 h-3/4 object-contain object-center max-sm:hidden hover:cursor-pointer' src="https://tse3.mm.bing.net/th/id/OIP.K8FAvCy9pDyFXpuhfZDs4wHaEK?pid=Api&P=0&h=220.jpg" alt="" />
 
                         </div>
 
@@ -50,7 +52,8 @@ function IntroSection() {
                         </div>
                         <div className="w-1/2 h-full flex items-center justify-center max-sm:hidden">
 
-                            <img className='w-3/4 h-3/4 object-contain object-center max-sm:hidden' src="https://plugins-media.makeupar.com/smb/blog/post/2022-09-02/23aa77d0-67eb-49fe-a515-b31bced529bf.jpg" alt="" />
+                            <img className=' w-3/4 h-3/4 object-contain object-center max-sm:hidden hover:cursor-pointer ' src="https://www.lightxeditor.com/blog/wp-content/uploads/2020/03/gamma-feature-image-min-1.jpg" alt="" />
+    
 
                         </div>
 
@@ -70,7 +73,7 @@ function IntroSection() {
                         </div>
                         <div className="w-1/2 h-full flex items-center justify-center max-sm:hidden">
 
-                            <img className='w-3/4 h-3/4 object-contain object-center max-sm:hidden' src="https://plugins-media.makeupar.com/smb/blog/post/2022-09-02/23aa77d0-67eb-49fe-a515-b31bced529bf.jpg" alt="" />
+                            <img className='w-3/4 h-3/4 object-contain object-center max-sm:hidden hover:cursor-pointer' src="https://plugins-media.makeupar.com/smb/blog/post/2022-09-02/23aa77d0-67eb-49fe-a515-b31bced529bf.jpg" alt="" />
 
                         </div>
 
@@ -90,7 +93,7 @@ function IntroSection() {
                         </div>
                         <div className="w-1/2 h-full flex items-center justify-center max-sm:hidden">
 
-                            <img className='w-3/4 h-3/4 object-contain object-center max-sm:hidden' src="https://plugins-media.makeupar.com/smb/blog/post/2022-09-02/23aa77d0-67eb-49fe-a515-b31bced529bf.jpg" alt="" />
+                            <img className='w-3/4 h-3/4 object-contain object-center max-sm:hidden hover:cursor-pointer' src="https://tse4.mm.bing.net/th/id/OIP.kJ6dsMUHelRYFCkWNzJLIAHaEJ?pid=Api&P=0&h=220.jpg" alt="" />
 
                         </div>
 
@@ -102,6 +105,40 @@ function IntroSection() {
         </motion.div>
 
     </section>
+    <section className='w-full h-screen sm:h-auto flex flex-col items-center justify-center'>
+        <div className='lg:w-1/2 lg:h-80 sm:w-auto sm:h-auto flex flex-col items-center justify-center '>
+             
+            <h2 className='text-2xl md:text-3xl font-bold font-poppins text-center sm:text-left max-sm:mt-4 sm:text-xl'>Transform Your Images, Instantly</h2>
+            <p className='mt-4 px-5 md:px-0 leading-relaxed sm:leading-8 text-sm text-left font-poppins  sm:text-left   '>Unlock the full potential of your visuals with our cutting-edge image processing platform. Whether you need high-quality enhancements, smart filters, background removal, or advanced editing tools, our AI-powered solutions make every image stunning and ready for any purpose. Seamlessly optimize, retouch, and transform your photos in just a few clicks, all from an intuitive, user-friendly interface designed to save time and elevate your creativity</p>
+         </div>
+         <div className='lg:w-1/2 lg:h-80 sm:w-auto sm:h-auto flex flex-col items-center justify-center '>
+             
+            <h2 className='text-2xl md:text-3xl font-bold font-poppins text-center sm:text-left max-sm:mt-4 sm:text-xl'>The Final Vision</h2>
+            <p className='mt-4 px-5 md:px-0 leading-relaxed sm:leading-8 text-sm text-left font-poppins  sm:text-left   '>Your images deserve more than just a filter—they deserve a transformation. Experience the perfect blend of power and simplicity. Clean, fast, and remarkably effective: its time to give your visuals the edge they need to stand out in a crowded digital world. Unlock a new standard of clarity that brings every hidden detail to life with stunning professional accuracy. Dont just share your story—amplify it with high-impact imagery that commands attention the moment it's seen.</p>
+         </div>
+
+    </section>
+    <section className=' w-full  h-20 bg-gradient-to-t from-primary to-white border rounded-sm border-none flex justify-center items-center ' >
+        <div className=' w-1/3 h-full flex items-center justify-center text-center'>
+                 <div className=' mx-auto px-6 '>
+                     <p className='text-sm font-poppins text-black'>
+                          © {new Date().getFullYear()} PicX. All rights reserved.
+                     </p>
+                 </div>
+                 <div className='  flex items-center justify-center gap-6 text-sm font-poppins text-black'>
+                     <p>Privacy Policy</p>
+                     <p>Terms of Service</p>
+                 </div>
+        </div>
+        
+
+
+
+
+
+    </section>
+
+  </>  
 
   )
 

@@ -38,17 +38,19 @@ function HeroSection() {
                         <div onClick={() => setOpenStartMenu(false)} className='w-full h-full bg-orange-300 absolute opacity-0'></div>
                     
                         <motion.div initial={{opacity : 0, scale : 0.9}} animate={{opacity : 1, scale : 1}} transition={{delay : 0.2}} className='shadow-md'>
-                            <Link to={'/image-enhancement'} className='flex items-center justify-center w-60 h-60 bg-white rounded-lg relative'>
+                            <Link to={'/image-enhancement'} className='flex flex-col items-center justify-center w-60 h-60 bg-white rounded-lg relative'>
 
-                                <h2 to={'/image-enhancement'} className='text-2xl font-poppins'>Enahance</h2>
+                                <div><h2 to={'/image-enhancement'} className='text-2xl font-poppins '>Enhance</h2></div>
+                                <div><img src="https://tse4.mm.bing.net/th/id/OIP.EsatZPYUZOyhORocPATNiAHaHa?pid=Api&P=0&h=220" alt="" className='w-40' /> </div>
 
                             </Link>
                         </motion.div>
                         
                         <motion.div initial={{opacity : 0, scale : 0.9}} animate={{opacity : 1, scale : 1}} transition={{delay : 0.2}} className='ml-5 shadow-md'>
-                            <Link to={'/image-enhancement'} className='flex items-center justify-center w-60 h-60 bg-white rounded-lg relative'>
+                            <Link to={'/image-enhancement'} className='flex flex-col items-center justify-center w-60 h-60 bg-white rounded-lg relative'>
 
-                                <h2 to={'/image-analysis'} className='text-2xl font-poppins'>Analyze</h2>
+                                <div><h2 to={'/image-analysis'} className='text-2xl font-poppins'>Analyze</h2></div>
+                                <div><img src="https://tse4.mm.bing.net/th/id/OIP.yQdQM3s3bWSmIlx4FfhYYwHaE7?pid=Api&P=0&h=220" alt=""/> </div>
 
                             </Link>
                         </motion.div>
