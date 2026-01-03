@@ -2,7 +2,7 @@ import axios from 'axios'
 import { AnimatePresence, motion } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../../Components/Navbar'
-import { BarLoader, PuffLoader } from 'react-spinners';
+import { BarLoader, FadeLoader, PuffLoader } from 'react-spinners';
 import AdjustMenu from './Components/AdjustMenu';
 import ResizeMenu from './Components/ResizeMenu';
 import GeometryScreen from './Components/GeometryScreen';
@@ -54,6 +54,7 @@ function EnhanceScreen() {
 
 
     async function applyAdjustments(image_Id, brightnes_val,contrast_val,saturation_val,gamma_value) {
+
         if (!image_Id) return;
 
         setIsProcessingImage(true);
@@ -74,6 +75,7 @@ function EnhanceScreen() {
         setImagePreview(res.data.image);
 
         setIsProcessingImage(false);
+
     }
     
     
@@ -180,6 +182,22 @@ function EnhanceScreen() {
             <div className={`flex flex-col items-center justify-center p-2 rounded-md ${!imageSelected && 'transition duration-300 hover:shadow-xl'} ${!imageSelected && !imagePreview == '' && 'shadow-xl'}`}>
 
                 <div className={`${imageSelected ? 'w-100 h-100' : 'w-70 h-70 shadow-xl'} flex flex-col items-center justify-center rounded-lg relative group transition duration-300`}>
+
+                    <AnimatePresence>
+
+                        {
+                            isProcessingImage && (
+                                <motion.div initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} className='w-full h-full absolute z-5 backdrop-blur-xs flex items-center justify-center flex-col'>
+
+                                    <FadeLoader color='#ffffff' />
+
+                                    <p className='mt-4 font-poppins text-white'>Let The Magic Happen</p>
+
+                                </motion.div>
+                            )
+                        }
+
+                    </AnimatePresence>
 
                     <div className='w-full h-full bg-transparent z-4 absolute'>
 

@@ -105,33 +105,34 @@ function IntroSection() {
         </motion.div>
 
     </section>
-    <section className='w-full h-screen sm:h-auto flex flex-col items-center justify-center'>
-        <div className='lg:w-1/2 lg:h-80 sm:w-auto sm:h-auto flex flex-col items-center justify-center '>
+    <section className='w-full mt-9 sm:h-auto flex flex-col items-center justify-center px-2 sm:px-0'>
+        <div className=' flex flex-col items-center justify-center '>
              
-            <h2 className='text-2xl md:text-3xl font-bold font-poppins text-center sm:text-left max-sm:mt-4 sm:text-xl'>Transform Your Images, Instantly</h2>
-            <p className='mt-4 px-5 md:px-0 leading-relaxed sm:leading-8 text-sm text-left font-poppins  sm:text-left   '>Unlock the full potential of your visuals with our cutting-edge image processing platform. Whether you need high-quality enhancements, smart filters, background removal, or advanced editing tools, our AI-powered solutions make every image stunning and ready for any purpose. Seamlessly optimize, retouch, and transform your photos in just a few clicks, all from an intuitive, user-friendly interface designed to save time and elevate your creativity</p>
+            <h2 className='text-xl sm:text-2xl font-bold font-poppins text-center '>Transform Your Images, Instantly</h2>
+            <p className=' w-full sm:w-1/2 mt-2 px-4 sm:px-8 leading-relaxed text-sm text-center sm:text-left font-poppins  '>Unlock the full potential of your visuals with our cutting-edge image processing platform. Whether you need high-quality enhancements, smart filters, background removal, or advanced editing tools, our AI-powered solutions make every image stunning and ready for any purpose. Seamlessly optimize, retouch, and transform your photos in just a few clicks, all from an intuitive, user-friendly interface designed to save time and elevate your creativity</p>
          </div>
-         <div className='lg:w-1/2 lg:h-80 sm:w-auto sm:h-auto flex flex-col items-center justify-center '>
+         <div className='mt-6 flex flex-col items-center justify-center '>
              
-            <h2 className='text-2xl md:text-3xl font-bold font-poppins text-center sm:text-left max-sm:mt-4 sm:text-xl'>The Final Vision</h2>
-            <p className='mt-4 px-5 md:px-0 leading-relaxed sm:leading-8 text-sm text-left font-poppins  sm:text-left   '>Your images deserve more than just a filter—they deserve a transformation. Experience the perfect blend of power and simplicity. Clean, fast, and remarkably effective: its time to give your visuals the edge they need to stand out in a crowded digital world. Unlock a new standard of clarity that brings every hidden detail to life with stunning professional accuracy. Dont just share your story—amplify it with high-impact imagery that commands attention the moment it's seen.</p>
+            <h2 className='text-xl sm:text-2xl font-bold font-poppins text-center'>The Final Vision</h2>
+            <p className='w-full sm:w-1/2 mt-2 px-4 sm:px-8 leading-relaxed text-sm text-center sm:text-left font-poppins  '>Your images deserve more than just a filter—they deserve a transformation. Experience the perfect blend of power and simplicity. Clean, fast, and remarkably effective: its time to give your visuals the edge they need to stand out in a crowded digital world. Unlock a new standard of clarity that brings every hidden detail to life with stunning professional accuracy. Dont just share your story—amplify it with high-impact imagery that commands attention the moment it's seen.</p>
          </div>
+         
 
     </section>
-    <section className=' w-full  h-20 bg-gradient-to-t from-primary to-white border rounded-sm border-none flex justify-center items-center ' >
-        <div className=' w-1/3 h-full flex items-center justify-center text-center'>
-                 <div className=' mx-auto px-6 '>
-                     <p className='text-sm font-poppins text-black'>
+    <section className=' w-full mt-10 bg-gradient-to-t from-light to-white flex flex-col sm:flex-row justify-center items-center py-4 sm:h-20 gap-2 sm:gap-0 ' >
+        <div className=' w-full sm:w-1/4 flex items-center justify-center text-center'>
+                 
+                     <p className='text-xs sm:text-sm font-poppins text-black'>
                           © {new Date().getFullYear()} PicX. All rights reserved.
                      </p>
-                 </div>
-                 <div className='  flex items-center justify-center gap-6 text-sm font-poppins text-black'>
+         </div>      
+         <div className='  w-full sm:w-1/4 flex items-center justify-center gap-4 sm:gap-6 text-sm font-poppins text-black'>
                      <p>Privacy Policy</p>
                      <p>Terms of Service</p>
-                 </div>
         </div>
+       
         
-
+        
 
 
 
